@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>
+			CONTROLceptive
+		</title>
+	<style>
+body, html {
+height: 100%;
+margin: 0;
+}
+
+
+.navbar {
+    overflow: hidden;
+	position: fixed;
+	top: 0;
+    background-color: #290000;
+    font-family: Gotham, Gotham Book, sans-serif;
+    width: 100%;
+}
+
+
+.navbar a {
+    float: right;
+    font-size: 13px;
+    color: white;
+    text-align: center;
+    padding: 25px 16px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.dropdown {
+    float: right;
+    overflow: hidden;
+
+}
+
+.dropdown .dropbtn {
+    font-size: 14	px;    
+    border: none;
+    outline: none;
+    color: white;
+    padding: 25px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn {
+    background-color: #f9f9f9;
+    color: #2a3557;
+    transition: 0.3s;
+}
+
+.navbar img {
+  vertical-align: middle;
+}
+
+.dropdown-content {
+    display: none;
+    position: fixed;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+    transition: 0.3s;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+}
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup {
+  margin: 70px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  width: 30%;
+  position: relative;
+  transition: all 5s ease-in-out;
+}
+
+.popup h2 {
+  margin-top: 0;
+  color: #333;
+  font-family: Tahoma, Arial, sans-serif;
+}
+.popup .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+.popup .close:hover {
+  color: #06D85F;
+}
+.popup .content {
+  max-height: 30%;
+  overflow: auto;
+}
+
+@media screen and (max-width: 700px){
+  .box{
+    width: 70%;
+  }
+  .popup{
+    width: 70%;
+  }
+}
+
+.button {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #ed844d;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 23px;
+  padding: 10px;
+  width: 250px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.close {
+    background: #606061;
+    color: #FFFFFF;
+    line-height: 25px;
+    position: absolute;
+    right: -12px;
+    text-align: center;
+    top: -10px;
+    width: 24px;
+    text-decoration: none;
+    font-weight: bold;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    border-radius: 12px;
+    -moz-box-shadow: 1px 1px 3px #000;
+    -webkit-box-shadow: 1px 1px 3px #000;
+    box-shadow: 1px 1px 3px #000;
+}
+.close:hover {
+    background: #00d9ff;
+}
+	</style>
+	<style>
+		div.gallery {
+			border: 1px solid #ccc;
+		}
+
+		div.gallery:hover {
+			border: 1px solid #777;
+		}
+
+		div.gallery img {
+			width: 100%;
+			height: auto;
+		}
+
+		div.desc {
+			padding: 15px;
+			text-align: center;
+		}
+
+		* {
+			box-sizing: border-box;
+		}
+
+		.signature {
+			padding: 0 10px;
+			float: left;
+			width: 230px;
+		}
+
+		@media only screen and (max-width: 1006px){
+			.responsive {
+				width: 49.99999%;
+				margin: 6px 0;
+			}
+		}
+
+		@media only screen and (max-width: 1006px){
+			.responsive {
+				width: 100%;
+			}
+		}
+
+		.clearfix:after {
+			content: "";
+			display: table;
+			clear: both;
+		}
+	</style>
+	<style>
+	.footer {
+	position: relative;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	background-color: #290000;
+	color: white;
+	text-align: center;
+	opacity: 80%;
+	}
+	</style>
+	
+	</head>
+	<body>
+	<div class="navbar" >
+		
+		<img src='logooo.png' vspace='2' hspace='25' align='left' height='60'>
+			
+		 <div class="dropdown">
+		    <button class="dropbtn">ANECDOTES
+		    	<i class="fa fa-caret-down"></i>
+		    </button>
+    		<div class="dropdown-content">
+   				<a href="anecdotes.html">Real Stories</a>
+   			</div>
+  		</div> 
+
+     <div class="dropdown">
+        <button class="dropbtn">CONSEQUENCES
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="consequences.html">A Young Mom's Life</a>
+          <a href="consequences.html">Mental Health</a>
+		  <a href="consequences.html">Risk Factors</a>
+		   <a href="consequences.html">Other Factors</a>
+        </div>
+      </div> 
+  
+  		<div class="dropdown">
+   			<button class="dropbtn">SOLUTION
+     			<i class="fa fa-caret-down"></i>
+   			</button>
+    		<div class="dropdown-content">
+      			<a href="solution.html">Comprehensive Understanding</a>
+      			<a href="solution.html">Contraceptive Techniques</a>
+    		</div>
+  		</div> 
+
+  		<div class="dropdown">
+   			<button class="dropbtn">QUESTIONS
+     			<i class="fa fa-caret-down"></i>
+   			</button>
+    		<div class="dropdown-content">
+      			<a href="questions.html">What's Missing?</a>
+      			<a href="#birth_control">Why Use Birth Control?</a>
+				<a href='#essential'>Why is it Essential?</a>
+    		</div>
+  		</div> 
+		
+		<div class="dropdown">
+   			<button class="dropbtn">HOME
+     			<i class="fa fa-caret-down"></i>
+   			</button>
+    		<div class="dropdown-content">
+				<a href="index.html"> CONTROLceptive </a>
+      			<a href="index.html">Teenage Pregnancy</a>
+				<a href="index.html">Survey</a>
+      			<a href="index.html">Survey Results</a>
+    		</div>
+  		</div> 
+    </div>
+	<br><br><br><br><br><br><br>
+	
+	<center>
+	<font face='montserrat extrabold' size='7' color='#290000'>
+		<i> WHAT'S MISSING? </i>
+	</font>
+	<table border='0' width='70%' cellpadding='10'>
+      <tr>
+        <td>
+        	<p align='middle' style='line-height:1.5'><font face='montserrat' size='4' color='#290000'>
+			<br>
+				The Youth Task Force launched a local online survey amongst 200 teens exploring youth’s attitudes toward sex and contraception.
+			<br><br>
+				The survey revealed an alarming lack of knowledge about contraception methods. Half (49%) of the sexually
+				active youths had been engaging in unprotected sex. One quarter of them knew of someone who had an unplanned
+				pregnancy. More than half of the respondents also did not discuss about contraception with their current partner
+				before sex, over a third believed that the withdrawal method was an effective birth control solution and one third
+				were engaging in such an unreliable method of contraception.
+			<br><br>
+				According to the study, more than half of the respondents were either unfamiliar with the types of contraceptive
+				available, or were confused and unaware of the appropriate options. About a quarter also believed that having sex
+				during a woman’s period was an effective contraception.
+			<br><br>
+				In developing countries, young women’s use of modern methods of contraception is limited by a range of factors,
+				a review of seven studies conducted in five countries suggests.
+			<br><br><br>
+			</p></font>
+		</td>
+	  </tr>
+	  <tr>
+		<td>
+			<font face='montserrat extrabold' size='6' color='#290000'>
+			<i> LACK OF KNOWLEDGE <i>
+			</font>
+		</td>
+	  </tr>
+	  <tr>
+		<td>
+			<p align='middle' style='line-height:1.5'><font face='montserrat' size='4' color='#290000'>
+			<br>
+				Lack of knowledge, access problems and side-effect fears were the “overarching themes” limiting the women’s use of hormonal 
+				contraceptives such as the birth control pill or hormone implants, Dr. Lisa M. Williamson of the MRC Social and Public Health 
+				Sciences Unit in Glasgow and her colleagues report.
+			<br><br>
+				The studies were conducted in sub-Saharan Africa and Southeast Asia and asked young women about their views on contraceptive use. 
+				Results showed that overall, the young women had gotten very little information on sex or contraception, and the information they
+				did get was frequently misleading. For example, one young woman thought she only had to take the birth control pill before having
+				sex. The belief that hormonal methods might impair future fertility was widespread. 
+			<br><br>
+				Many women also feared having others find out they were using contraceptives, because they would be known to be having sex, or
+				thought of as being unable to bear children later on.
+			<br><br>
+				Generally, the young women reported having an easier time accessing condoms, but many saw them as methods for preventing sexually
+				transmitted infection, rather than as a contraceptive, and associated them with disease and promiscuity.
+			<br><br>
+				Knowledge of contraception means knowing at least one of the methods. <br>
+				<b> Contraceptive methods include...</b>
+			<br><br>
+		</td>
+	  </tr>
+	  <tr>
+		<td>
+		<center>
+	<div class="signature">
+		<div class="gallery">
+			<img src="femalesterilization.png" width="100%">
+			<div class="desc">
+				<font face='Montserrat' size='3' color='#290000'>
+						<b> FEMALE STERILIZATION </b>
+				</font>
+			</div>
+		</div>
+	</div>
+		<div class="signature">
+		<div class="gallery">
+			<img src="malesterilization.png" width="100%">
+			<div class="desc">
+				<font face='Montserrat' size='3' color='#290000'>
+						<b> MALE STERILIZATION </b>
+				</font>
+			</div>
+		</div>
+	</div>
+	<div class="signature">
+		<div class="gallery">
+			<img src="pill.png" width="100%">
+			<div class="desc">
+				<font face='Montserrat' size='3' color='#290000'>
+						<b> THE PILL </b>
+						<br><br>
+				</font>
+			</div>
+		</div>
+	</div>
+		<div class="signature">
+		<div class="gallery">
+			<img src="iud.png" width="100%">
+			<div class="desc">
+				<font face='Montserrat' size='3' color='#290000'>
+						<b> THE INTRAUTERINE DEVICE (IUD) </b>
+				</font>
+			</div>
+		</div>
+	</div>
+		</center>
+		</td>
+	  </tr>
+	  <tr>
+		<td>
+		<center>
+	<div class="signature">
+		<div class="gallery">
+			<img src="injectibles.png" width="100%">
+			<div class="desc">
+				<font face='Montserrat' size='3' color='#290000'>
+						<b> INJECTIBLES </b>
+						<br><br>
+				</font>
+			</div>
+		</div>
+	</div>
+		<div class="signature">
+		<div class="gallery">
+			<img src="implants.png" width="100%">
+			<div class="desc">
+				<font face='Montserrat' size='3' color='#290000'>
+						<b> IMPLANTS </b>
+						<br><br>
+				</font>
+			</div>
+		</div>
+	</div>
+	<div class="signature">
+		<div class="gallery">
+			<img src="malecondoms.png" width="100%">
+			<div class="desc">
+				<font face='Montserrat' size='3' color='#290000'>
+						<b> MALE CONDOMS </b>
+						<br><br>
+				</font>
+			</div>
+		</div>
+	</div>
+		<div class="signature">
+		<div class="gallery">
+			<img src="femalecondoms.png" width="100%">
+			<div class="desc">
+				<font face='Montserrat' size='3' color='#290000'>
+						<b> FEMALE CONDOMS </b>
+						<br><br>
+				</font>
+			</div>
+		</div>
+	</div>
+		</center>
+		</td>
+	  </tr>
+	  <tr>
+		<td>
+		<center>
+	<div class="signature">
+		<div class="gallery">
+			<img src="diaphragm.png" width="100%">
+			<div class="desc">
+				<font face='Montserrat' size='3' color='#290000'>
+						<b> THE DIAPHRAGM</b>
+						<br><br>
+				</font>
+			</div>
+		</div>
+	</div>
+		<div class="signature">
+		<div class="gallery">
+			<img src="jelly.png" width="100%">
+			<div class="desc">
+				<font face='Montserrat' size='3' color='#290000'>
+						<b> FOAM/JELLY </b>
+						<br><br>
+				</font>
+			</div>
+		</div>
+	</div>
+	<div class="signature">
+		<div class="gallery">
+			<img src="lactational.png" width="100%">
+			<div class="desc">
+				<font face='Montserrat' size='3' color='#290000'>
+						<b> LACTATIONAL AMENORRHEA </b>
+				</font>
+			</div>
+		</div>
+	</div>
+		<div class="signature">
+		<div class="gallery">
+			<img src="traditional.png" width="100%">
+			<div class="desc">
+				<font face='Montserrat' size='3' color='#290000'>
+						<b> TRADITIONAL METHODS </b>
+				</font>
+			</div>
+		</div>
+	</div>
+		</center>
+		</td>
+	  </tr>
+	  <tr>
+		<td>
+			<p align='middle' style='line-height:1.5'><font face='montserrat' size='4' color='#290000'>
+			<br>
+				<a id='birth_control'>
+				traditional methods include <b> periodic abstinence</b> and <b>withdrawal.</b>
+			<br><br><br><br><br><br>
+			</p>
+		</td>
+	  </tr>
+	  <tr>
+		<td> 
+		<center>
+
+			<font face='montserrat extrabold' size='7' color='#290000'>
+				<i> WHY USE BIRTH CONTROL? </i>
+			</font>
+			<br>
+		</center>
+		</td>
+	  </tr>
+	  <tr>
+		<td>
+			<p align='middle' style='line-height:1.5'><font face='montserrat' size='4' color='#290000'>
+			<br>
+				Hormonal contraceptives are very effective at preventing unintended pregnancy. Between<br> 0 to 9 in every 100 people relying on 
+				these will get pregnant over the course of a year, depending on which form of hormonal contraceptive they use. This number is 
+				lower in people who use hormonal contraceptives perfectly. In comparison, 18 in 100 people relying on male condoms will get 
+				pregnant over the course of a year. The implantable rod, or just the implant, is the most effective form of hormonal contraceptive
+				and is usually placed in your arm by your healthcare provider. Less than 1 in 100 people using this method will get pregnant over 
+				the course of a year .
+			<br><br>
+				The studies were conducted in sub-Saharan Africa and Southeast Asia and asked young women about their views on contraceptive use. 
+				Results showed that overall, the young women had gotten very little information on sex or contraception, and the information they
+				did get was frequently misleading. For example, one young woman thought she only had to take the birth control pill before having
+				sex. The belief that hormonal methods might impair future fertility was widespread. 
+			<br><br>
+			</p></font>
+		</td>
+	  </tr>
+	  <tr>
+		<td>
+			<font face='montserrat extrabold' size='5' color='#290000'>
+			<i> WATCH THIS VIDEO <i>
+			</font>
+		</td>
+	  </tr>
+	  <tr>
+		<td>
+			<center>
+				<iframe width="900" height="500" src="https://www.youtube.com/embed/JVmELtFvxuU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+				</iframe>
+				<a id='essential'>
+			</center>
+			<br><br><br><br><br><br>
+		</td>
+	  </tr>
+	  <tr>
+		<td>
+		<center>
+			<font face='montserrat extrabold' size='7' color='#290000'>
+				<i> WHY IS IT ESSENTIAL? </i>
+			</font>
+			<br>
+		</center>
+		</td>
+	  </tr>
+	  <tr>
+		<td>
+			<p align='middle' style='line-height:1.5'><font face='montserrat' size='4' color='#290000'>
+			<br>
+				Despite the advances that have been made in contraception over the past fifty years, an estimated 222 million women 
+				worldwide cannot get the birth control they want and need. Birth control can prevent dangers from pregnancies that are:
+			<br><br>
+			</p></font>
+		</td>
+	  </tr>
+	</table>
+	<table border='0' width='70%' cellpadding='7'>
+	  <tr>
+		<td width='20%'>
+			<p align='middle'>
+			<font face='montserrat extrabold' size='5' color='#290000'>
+				<i> TOO SOON. </i>
+			</font>
+			</p>
+		</td>
+		<td width='80%'>
+			<p align='middle'><font face='montserrat' size='3' color='#290000'>
+				A quarter of the world’s women live in countries where the average age at first birth is less than 20 years old. 
+				A woman who bears children at a younger age tends to have more children overall, is less able to provide for them, 
+				and is more likely to suffer ill health. <br> Children born to very young mothers are also more likely to have health problems.
+			</p></font>
+		</td>
+	  </tr>
+	  <tr>
+		<td width='20%'>
+			<p align='middle'>
+			<font face='montserrat extrabold' size='5' color='#290000'>
+				<i> TOO LATE. </i>
+			</font>
+			</p>
+		</td>
+		<td width='80%'>
+			<p align='middle'><font face='montserrat' size='3' color='#290000'>
+				Older women face more danger in pregnancy and birth if they have other health <br> problems or have had many children.
+			</p></font>
+		</td>
+	  </tr>
+	  <tr>
+		<td width='20%'>
+			<p align='middle'>
+			<font face='montserrat extrabold' size='5' color='#290000'>
+				<i> TOO CLOSE. </i>
+			</font>
+			</p>
+		</td>
+		<td width='80%'>
+			<p align='middle'><font face='montserrat' size='3' color='#290000'>
+				A woman’s body needs time to heal between pregnancies — ideally 18 months or more.
+			</p></font>
+		</td>
+	  </tr>
+	  <tr>
+		<td width='20%'>
+			<p align='middle'>
+			<font face='montserrat extrabold' size='5' color='#290000'>
+				<i> TOO MANY. </i>
+			</font>
+			</p>
+		</td>
+		<td width='80%'>
+			<p align='middle'><font face='montserrat' size='3' color='#290000'>
+				A woman with more than four children has a greater risk of death after childbirth from bleeding and other causes.
+			</p></font>
+		</td>
+	  </tr>
+	  <tr>
+		<td width='20%'>
+			<p align='middle'>
+			<font face='montserrat extrabold' size='5' color='#290000'>
+				<i> NOT WANTED. </i>
+			</font>
+			</p>
+		</td>
+		<td width='80%'>
+			<p align='middle'><font face='montserrat' size='3' color='#290000'>
+				Women who have unwanted pregnancies are more likely to have abortions. <br> Unfortunately, nearly half of all abortions worldwide are considered
+				unsafe, which means they are performed by an individual lacking the necessary skills, or in an environment that does not conform to minimal
+				medical standards, or both. Unsafe abortion is common in places where abortion is illegal. Each year about 68,000 women die of unsafe abortion,
+				making it a leading cause of maternal death.
+			</p></font>
+		</td>
+	  </tr>
+	  <tr>
+		<td colspan='2'>
+			<p align='middle' style='line-height:1.5'><font face='montserrat' size='3' color='#290000'>
+			<br>
+				By delaying and spacing out childbearing, a woman increases her chances of finishing school and finding work that will provide a viable 
+				income.  Modern birth control methods also have other health benefits, like improving anemia by reducing menstrual bleeding.  Male and 
+				female condoms also prevent the spread of some sexually transmitted infections (STIs) including HIV.
+			<br><br><br><br>
+			</p></font>
+		</td>
+	  </tr>
+	</table>
+	</center>
+	
+	<div class="footer">
+		<br>
+		<font face='montserrat' size='2' color='white'>
+		  <b> ALL RIGHTS RESERVED © 2019 </b>
+		</font>
+		<br><br>
+	</div>
+	
+	</body>
+</html>

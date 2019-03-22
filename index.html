@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>
+			CONTROLceptive
+		</title>
+	<style>
+body, html {
+height: 100%;
+margin: 0;
+}
+
+
+.navbar {
+    overflow: hidden;
+	position: fixed;
+	top: 0;
+    background-color: #290000;
+    font-family: Gotham, Gotham Book, sans-serif;
+    width: 100%;
+}
+
+
+.navbar a {
+    float: right;
+    font-size: 13px;
+    color: white;
+    text-align: center;
+    padding: 25px 16px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.dropdown {
+    float: right;
+    overflow: hidden;
+
+}
+
+.dropdown .dropbtn {
+    font-size: 14	px;    
+    border: none;
+    outline: none;
+    color: white;
+    padding: 25px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn {
+    background-color: #f9f9f9;
+    color: #2a3557;
+    transition: 0.3s;
+}
+
+.navbar img {
+  vertical-align: middle;
+}
+
+.dropdown-content {
+    display: none;
+    position: fixed;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+    transition: 0.3s;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+}
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup {
+  margin: 70px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  width: 30%;
+  position: relative;
+  transition: all 5s ease-in-out;
+}
+
+.popup h2 {
+  margin-top: 0;
+  color: #333;
+  font-family: Tahoma, Arial, sans-serif;
+}
+.popup .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+.popup .close:hover {
+  color: #06D85F;
+}
+.popup .content {
+  max-height: 30%;
+  overflow: auto;
+}
+
+@media screen and (max-width: 700px){
+  .box{
+    width: 70%;
+  }
+  .popup{
+    width: 70%;
+  }
+}
+
+.button {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #ed844d;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 23px;
+  padding: 10px;
+  width: 250px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.close {
+    background: #606061;
+    color: #FFFFFF;
+    line-height: 25px;
+    position: absolute;
+    right: -12px;
+    text-align: center;
+    top: -10px;
+    width: 24px;
+    text-decoration: none;
+    font-weight: bold;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    border-radius: 12px;
+    -moz-box-shadow: 1px 1px 3px #000;
+    -webkit-box-shadow: 1px 1px 3px #000;
+    box-shadow: 1px 1px 3px #000;
+}
+.close:hover {
+    background: #00d9ff;
+}
+	</style>
+	<style>
+	.footer {
+	position: relative;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	background-color: #290000;
+	color: white;
+	text-align: center;
+	opacity: 80%;
+	}
+	</style>
+	</head>
+	<body>
+	<div class="navbar" >
+		
+		<img src='logooo.png' vspace='2' hspace='25' align='left' height='60'>
+			
+		 <div class="dropdown">
+		    <button class="dropbtn">ANECDOTES
+		    	<i class="fa fa-caret-down"></i>
+		    </button>
+    		<div class="dropdown-content">
+   				<a href="anecdotes.html">Real Stories</a>
+   			</div>
+  		</div> 
+
+     <div class="dropdown">
+        <button class="dropbtn">CONSEQUENCES
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="consequences.html">A Young Mom's Life</a>
+          <a href="consequences.html">Mental Health</a>
+		  <a href="consequences.html">Risk Factors</a>
+		   <a href="consequences.html">Other Factors</a>
+        </div>
+      </div> 
+  
+  		<div class="dropdown">
+   			<button class="dropbtn">SOLUTION
+     			<i class="fa fa-caret-down"></i>
+   			</button>
+    		<div class="dropdown-content">
+      			<a href="solution.html">Comprehensive Understanding</a>
+      			<a href="solution.html">Contraceptive Techniques</a>
+    		</div>
+  		</div> 
+
+  		<div class="dropdown">
+   			<button class="dropbtn">QUESTIONS
+     			<i class="fa fa-caret-down"></i>
+   			</button>
+    		<div class="dropdown-content">
+      			<a href="questions.html">What's Missing?</a>
+      			<a href="questions.html">Why Use Birth Control?</a>
+				<a href='questions.html'>Why is it Essential?</a>
+    		</div>
+  		</div> 
+		
+		<div class="dropdown">
+   			<button class="dropbtn">HOME
+     			<i class="fa fa-caret-down"></i>
+   			</button>
+    		<div class="dropdown-content">
+				<a href="#controlceptive"> CONTROLceptive </a>
+      			<a href="#teenage_pregnancy">Teenage Pregnancy</a>
+				<a href="#survey">Survey</a>
+      			<a href="#survey_results">Survey Results</a>
+    		</div>
+  		</div> 
+    </div>
+	<br><br><br>
+	<center>
+		<img src='header.jpg' width='100%'>
+		<a id='controlceptive'>	
+	</center>
+	<center>	
+	<br><br><br><br><br><br><br>
+	<hr width='300px' size='3px' color='#000000'>
+	<br>
+	
+	<p align='middle' style='line-height:1.5'><font face='montserrat' size='4' color='black'>
+		<br>
+		We, at <b>CONTROLceptive.ph</b> tend to help mitigate the rampant uprising cases of <b> teenage pregnancy </b>. One of the<br> main
+		reasons of this rising issue — is the <b>lack of knowledge</b> concerning, mainly, contraceptives (birth control). We created <br>
+		this virtual community to help you understand the risks, and all possible ways we can prevent this, as it is perfectly 
+		<i> preventable</i>. <br> We want to help spread awareness all over the world, and we know you do, too! <b>Sign up, to join our community now!</b>
+	</p></font>
+	
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+			<style>
+			body,h1,h2,h3,h4,h5,h6 {font-family: "Montserrat Medium"}
+			</style>
+			 <div class="w3-display w3-container w3-large">
+				<p><button onclick="document.getElementById('menu').style.display='block'" class="w3-button w3-black">
+				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+				Join Now
+				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+				</button></p>
+		<div id="menu" class="w3-modal">
+			<div class="w3-modal-content w3-animate-zoom">
+				<div class="w3-container w3-black w3-display-container">
+					<span onclick="document.getElementById('menu').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
+					<img src='logooo.png' width='220' vspace='7'>
+				</div>
+					<div class="w3-container w3-white w3-padding-16">
+					<form action="/action_page.php" target="_blank">
+						<div class="w3-row-padding" style="margin:0 -16px;">
+					<div class="w3-half w3-margin-bottom">
+						<label>First Name</label>
+						<input class="w3-input w3-border" type="text" placeholder="ex. Kaj Anastazja" name="CheckIn" required>
+					</div>
+					<div class="w3-half">
+						<label>Age</label>
+						<input class="w3-input w3-border" type="number" value="1" name="Age" min="1" required>
+					</div>
+					</div>
+					<div class="w3-row-padding" style="margin:0 -16px;">
+					<div class="w3-half w3-margin-bottom">
+						<label>Last Name</label>
+						<input class="w3-input w3-border" type="text" placeholder="ex. Elizondo" name="CheckIn" required>
+					</div>
+					<div class="w3-half">
+						<label>Sex</label>
+						<input class="w3-input w3-border" type="number" placeholder='Female' name="Sex" required>
+					</div>
+					</div>
+					<div class="w3-row-padding" style="margin:8px -16px;">
+					<div class="w3-full w3-margin-bottom">
+						<label>Email</label>
+						<input class="w3-input w3-border" type="text" placeholder="@gmail.com" name="Email" required>
+					</div>
+					</div>
+					<button class="w3-button w3-dark-grey" type="submit">&nbsp; &nbsp; &nbsp; Sign Up &nbsp; &nbsp; &nbsp;</button>
+					</form>
+				</div>
+			</div>
+			</div>
+	<a id='teenage_pregnancy'>	
+	<br><br>
+	<hr size='3px' width='300px' color='black'>
+	<br><br><br><br><br><br>
+
+	<font face='montserrat extrabold' size='7' color='#290000'>
+		<i> TEENAGE PREGNANCY </i>
+	</font>
+			
+    <table border='0' width='70%' cellpadding='10'>
+      <tr>
+        <td>
+        	<p align='middle' style='line-height:1.5'><font face='montserrat' size='4' color='#290000'>
+			<br>
+				A teenage pregnancy, as defined by the <b> American Pregnancy Association</b>, is a pregnancy
+				that occurs for a woman under the age of 20.  Although technically not a teenager, a young
+				woman 12 or under who is pregnant falls into this definition of teenage pregnancy as well.
+			</p></font>
+			<img src='bar graph.png' width='450' style='float:right; margin-left:10px;'>
+			<p align='right' style='line-height:1.5'><font face='montserrat' size='4' color='#290000'>
+				In 2016, there were <b> 20.3 births for every 1,000 adolescent females</b> ages 15-19, or 209,809 babies 
+				born to females in this age group. Births to teens ages 15-19 account for 5.3 percent of all births 
+				in 2016. Nearly nine in ten (89 percent) of these births occurred outside of marriage.
+			<br><br>
+				In the Philippines, according to the 2002 <br>
+				Young Adult Fertility and Sexuality Study by the University of the Philippines Population Institute 
+				(UPPI) and the Demographic Research and 
+			</p></font>
+			<p align='middle' style='line-height:1.5'><font face='montserrat' size='4' color='#290000'>
+				Development Foundation, <b>26 percent of our Filipino youth nationwide from ages 15 to 25 admitted to having a premarital sex experience.</b>
+				What’s worse is that <b>38 percent</b> of our youth are already in a <b>live-in arrangement.</b>
+			<br><br>
+				The national scope of the problem is alarming; the United Nation Population Fund Agency (UNPFC) representative 
+				Ugochi Daniels’ claims that this could derail the country’s Millennium Development Goals (MDGs). The Millennium 
+				Development Goals are eight international development goals that the UN member states have agreed to achieve by 
+				the year 2015. These MDG include eradicating extreme poverty and attaining universal primary education. In fact, 
+				<a id='survey'>
+				among the six ASEAN major economies, the Philippines ranked the highest rate in teenage pregnancy.
+			</p></font>
+			<br><br><br>
+		</td>
+	  </tr>
+	  <tr>
+		<td>
+			<font face='tw cen mt' size='4' color='#290000'>
+			<i> answer our... </i>
+			</font>
+			<br>
+			<font face='montserrat extrabold' size='7' color='#290000'>
+			<i> SURVEY <i>
+			</font>
+			<br><br>
+		</td>
+	  </tr>
+	  <tr>
+		<td>
+			<center>
+				<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfFE18NOUZa4FaiiJL8rO3H9NaWuybB710G23rcSzIZM2tPcw/viewform?embedded=true" width="700" height='520' frameborder="0" marginheight="0" marginwidth="0">Naglo-load...</iframe>
+			</center>
+			<a id='#survey_results'>
+			<br><br><br>
+		</td>
+	  </tr>
+	  <tr>
+		<td>
+			<font face='montserrat extrabold' size='7' color='#290000'>
+			<i> SURVEY RESULTS<i>
+			</font>
+			<br>
+			<font face='tw cen mt' size='4' color='#290000'>
+			<i> (updated monthly) </i>
+			</font>
+			<br><br>
+		</td>
+	  </tr>
+	  <tr>
+		<td>
+		<img src='infographic.jpg' width='100%'>
+		</td>
+	  </tr>
+	</table>
+	<br><br>
+	</center>
+	
+	<div class="footer">
+		<br>
+		<font face='montserrat' size='2' color='white'>
+		  <b> ALL RIGHTS RESERVED © 2019 </b>
+		</font>
+		<br><br>
+	</div>
+	
+	</body>
+</html>
+	

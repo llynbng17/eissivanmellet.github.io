@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>
+			CONTROLceptive
+		</title>
+	<style>
+body, html {
+height: 100%;
+margin: 0;
+}
+
+
+.navbar {
+    overflow: hidden;
+	position: fixed;
+	top: 0;
+    background-color: #290000;
+    font-family: Gotham, Gotham Book, sans-serif;
+    width: 100%;
+}
+
+
+.navbar a {
+    float: right;
+    font-size: 13px;
+    color: white;
+    text-align: center;
+    padding: 25px 16px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.dropdown {
+    float: right;
+    overflow: hidden;
+
+}
+
+.dropdown .dropbtn {
+    font-size: 14	px;    
+    border: none;
+    outline: none;
+    color: white;
+    padding: 25px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn {
+    background-color: #f9f9f9;
+    color: #2a3557;
+    transition: 0.3s;
+}
+
+.navbar img {
+  vertical-align: middle;
+}
+
+.dropdown-content {
+    display: none;
+    position: fixed;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+    transition: 0.3s;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+}
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup {
+  margin: 70px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  width: 30%;
+  position: relative;
+  transition: all 5s ease-in-out;
+}
+
+.popup h2 {
+  margin-top: 0;
+  color: #333;
+  font-family: Tahoma, Arial, sans-serif;
+}
+.popup .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+.popup .close:hover {
+  color: #06D85F;
+}
+.popup .content {
+  max-height: 30%;
+  overflow: auto;
+}
+
+@media screen and (max-width: 700px){
+  .box{
+    width: 70%;
+  }
+  .popup{
+    width: 70%;
+  }
+}
+
+.button {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #ed844d;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 23px;
+  padding: 10px;
+  width: 250px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.close {
+    background: #606061;
+    color: #FFFFFF;
+    line-height: 25px;
+    position: absolute;
+    right: -12px;
+    text-align: center;
+    top: -10px;
+    width: 24px;
+    text-decoration: none;
+    font-weight: bold;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    border-radius: 12px;
+    -moz-box-shadow: 1px 1px 3px #000;
+    -webkit-box-shadow: 1px 1px 3px #000;
+    box-shadow: 1px 1px 3px #000;
+}
+.close:hover {
+    background: #00d9ff;
+}
+	</style>
+	<style>
+		div.gallery {
+			border: 1px solid #ccc;
+		}
+
+		div.gallery:hover {
+			border: 1px solid #777;
+		}
+
+		div.gallery img {
+			width: 100%;
+			height: auto;
+		}
+
+		div.desc {
+			padding: 15px;
+			text-align: center;
+		}
+
+		* {
+			box-sizing: border-box;
+		}
+
+		.signature {
+			padding: 0 10px;
+			float: left;
+			width: 305px;
+		}
+
+		@media only screen and (max-width: 1006px){
+			.responsive {
+				width: 49.99999%;
+				margin: 6px 0;
+			}
+		}
+
+		@media only screen and (max-width: 1006px){
+			.responsive {
+				width: 100%;
+			}
+		}
+
+		.clearfix:after {
+			content: "";
+			display: table;
+			clear: both;
+		}
+	</style>
+	<style>
+	.footer {
+	position: relative;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	background-color: #290000;
+	color: white;
+	text-align: center;
+	opacity: 80%;
+	}
+	</style>
+	</head>
+	<body>
+	<div class="navbar" >
+		
+		<img src='logooo.png' vspace='2' hspace='25' align='left' height='60'>
+			
+		 <div class="dropdown">
+		    <button class="dropbtn">ANECDOTES
+		    	<i class="fa fa-caret-down"></i>
+		    </button>
+    		<div class="dropdown-content">
+   				<a href="anecdotes.html">Real Stories</a>
+   			</div>
+  		</div> 
+
+     <div class="dropdown">
+        <button class="dropbtn">CONSEQUENCES
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="consequences.html">A Young Mom's Life</a>
+          <a href="consequences.html">Mental Health</a>
+		  <a href="consequences.html">Risk Factors</a>
+		   <a href="consequences.html">Other Factors</a>
+        </div>
+      </div> 
+  
+  		<div class="dropdown">
+   			<button class="dropbtn">SOLUTION
+     			<i class="fa fa-caret-down"></i>
+   			</button>
+    		<div class="dropdown-content">
+      			<a href="solution.html">Comprehensive Understanding</a>
+      			<a href="solution.html">Contraceptive Techniques</a>
+    		</div>
+  		</div> 
+
+  		<div class="dropdown">
+   			<button class="dropbtn">QUESTIONS
+     			<i class="fa fa-caret-down"></i>
+   			</button>
+    		<div class="dropdown-content">
+      			<a href="questions.html">What's Missing?</a>
+      			<a href="questions.html">Why Use Birth Control?</a>
+				<a href='questions.html'>Why is it Essential?</a>
+    		</div>
+  		</div> 
+		
+		<div class="dropdown">
+   			<button class="dropbtn">HOME
+     			<i class="fa fa-caret-down"></i>
+   			</button>
+    		<div class="dropdown-content">
+				<a href="index.html"> CONTROLceptive </a>
+      			<a href="index.html">Teenage Pregnancy</a>
+				<a href="index.html">Survey</a>
+      			<a href="index.html">Survey Results</a>
+    		</div>
+  		</div> 
+    </div>
+	<br><br><br><br><br><br><br>
+	
+	<center>
+		<font face='montserrat extrabold' size='7' color='#290000'>
+			<i> ANECDOTES </i>
+		</font>
+	</center>
+	
+	<center>
+	<table border='0' width='70%' cellpadding='10'>
+      <tr>
+        <td>
+			<br><br><br><br>
+			<font face='montserrat extrabold' size='6' color='#290000'>
+				<i> MISHKA (A Short Film) <i>
+			</font>
+		<br><br>
+		</td>
+	  </tr>
+	  <tr>
+		<td>
+			<center>
+				<iframe width="900" height="500" src="https://www.youtube.com/embed/2sH9C2v7cg8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+				</iframe>
+			</center>
+		</td>
+	  </tr>
+	  <tr>
+		<td>
+		</td>
+	  </tr>
+	</table>
+	
+	<table border='0' width='70%' cellpadding='10'>
+      <tr>
+        <td colspan='3'>
+			<br><br><br><br>
+			<font face='montserrat extrabold' size='6' color='#290000'>
+				<i> REAL STORIES <i>
+			</font>
+		<br><br>
+		</td>
+	  </tr>
+	  <tr>
+		<td>
+		<center>
+	<div class="signature">
+		<div class="gallery">
+			<img src="woman.png" width="100%">
+			<div class="desc">
+				<font face='Montserrat' size='4' color='#290000'>
+					<p style='letter-spacing:1.5px'>
+						<b> DANIELA </b>
+					</p>
+				</font>
+				<font face='Montserrat Light' size='2' color='#290000'>
+					<p style='line-height:1.5'>
+						<br>
+						"I was in a monogamous relationship, so I felt like [going on birth control] made sense. The experience was awful. 
+						I wanted to talk about options with my doctor, but she said the pill was the best option for me. I wanted to talk 
+						about NuvaRing, the patch, Depo-Provera, and IUDs to make the best decision for myself. She said low-dose would be
+						the best.
+						<br><br>
+						I felt totally sex-shamed. I wanted to get an STD test as well as talk about birth control. 
+						<br><br>
+						I had a perfect period before I <br> went on birth control, so when I had unexpected spotting and random periods, it was awful. 
+						Lots of bleeding, mood swings, and spotting. I felt so out of control of my body and emotions. I tried five pills before I 
+						went for an IUD (which, in the end, I didn't get, because it hurt so much). I now use condoms! It's not the best, but it means 
+						no chemicals or gadgets. It doesn't 'ruin the mood,' it takes very little time, and my boyfriend is happy I've decided to go 
+						with a method that makes me feel happy. It does remove a bit the spontaneity element, but a condom is usually always nearby."
+						<br><br>
+					</p>
+				</font>
+			</div>
+		</div>
+	</div>
+	
+	<div class="signature">
+		<div class="gallery">
+			<img src="woman.png" width="100%">
+			
+			<div class="desc">
+				<font face='Montserrat' size='4' color='black'>
+					<p style='letter-spacing:1.5px'>
+						<b> LILIAN MIN </b>
+					</p>
+				</font>
+				<font face='Montserrat Light' size='2' color='black'>
+					<p style='line-height:1.5'>
+						<br>
+						“When I was in high school, I wanted to surreptitiously get on the pill for my ~*sexual activity*~, but framed the convo 
+						to my doctor and mother as me searching for a way to ‘fix’ my acne. Well, I quite soon after broke up with the person I’d
+						been seeing, and then because the Pill wasn’t doing anything for my skin, I dropped that and went BC- (and sex-) free for years.
+						<br><br>
+						After getting into a long-term relationship and having a pregnancy moment, I began to become debilitatingly paranoid about the
+						possibility of becoming pregnant again. My partner and I had used condoms before, but as my fear had compounded, I spoke to my
+						OB/GYN about potentially getting an IUD. 
+						<br><br>
+						However, since I also suffer from regular sad spirals right before my period, my doc 
+						instead suggested going on a low dose hormonal pillthis link opens in a new tab to help with that as well. The transition into
+						this pill was rough — I spent a week struggling not to cry in public — but three months in, I like having more peace of mind
+						regarding my period, and weirdly enough: My skin does seem to be getting better.”
+					</p>
+				</font>
+			</div>
+		</div>
+	</div>
+		<div class="signature">
+		<div class="gallery">
+			<img src="woman.png" width="100%">
+			<div class="desc">
+				<font face='Montserrat' size='4' color='#290000'>
+					<p style='letter-spacing:1.5px'>
+						<b> KATE </b>
+					</p>
+				</font>
+				<font face='Montserrat Light' size='2' color='#290000'>
+					<p style='line-height:1.5'>
+						<br>
+						"I decided to go on it on my own<br> when I was 15 after I lost my virginity. I recall being a little bit embarrassed and mostly
+						stressed trying to figure out the logistics of how I was going to go to CVS to fill a prescription without my parents knowing. 
+						I wasn't going out of my way to hide it, but I wasn't ready to tell them I was sexually active yet and figured this would be
+						kind of a giveaway.
+						<br><br>
+						I had really good luck with the pill <br> and never experienced any negative side effects, though plenty of my friends did.
+						I took a break at the beginning of last year when my pill ran out at the same time I went through a horrible breakup, and I decided I
+						may as well go off it and see what happened—it turned out my periods were really irregular, and I ended up being diagnosed with 
+						polycystic ovarian syndrome, so I'm back on Jolessa for the foreseeable future. Birth control is the first-line treatment for PCOS 
+						symptoms, so I'm honestly grateful to the universe and my wonderful doctors for my birth control, because those 17 years on the pill 
+						ended up protecting my body and my health more than I realized."
+						<br><br>
+					</p>
+				</font>
+			</div>
+		</div>
+	</div>
+	</center>
+		</td>
+	  </tr>
+	</table>
+	<br><br><br>
+	</center>
+	
+	
+	<div class="footer">
+		<br>
+		<font face='montserrat' size='2' color='white'>
+		  <b> ALL RIGHTS RESERVED © 2019 </b>
+		</font>
+		<br><br>
+	</div>
+	</body>
+</html>

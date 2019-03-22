@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>
+			CONTROLceptive
+		</title>
+	<style>
+body, html {
+height: 100%;
+margin: 0;
+}
+
+
+.navbar {
+    overflow: hidden;
+	position: fixed;
+	top: 0;
+    background-color: #290000;
+    font-family: Gotham, Gotham Book, sans-serif;
+    width: 100%;
+}
+
+
+.navbar a {
+    float: right;
+    font-size: 13px;
+    color: white;
+    text-align: center;
+    padding: 25px 16px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.dropdown {
+    float: right;
+    overflow: hidden;
+
+}
+
+.dropdown .dropbtn {
+    font-size: 14	px;    
+    border: none;
+    outline: none;
+    color: white;
+    padding: 25px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn {
+    background-color: #f9f9f9;
+    color: #2a3557;
+    transition: 0.3s;
+}
+
+.navbar img {
+  vertical-align: middle;
+}
+
+.dropdown-content {
+    display: none;
+    position: fixed;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+    transition: 0.3s;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+}
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup {
+  margin: 70px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  width: 30%;
+  position: relative;
+  transition: all 5s ease-in-out;
+}
+
+.popup h2 {
+  margin-top: 0;
+  color: #333;
+  font-family: Tahoma, Arial, sans-serif;
+}
+.popup .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+.popup .close:hover {
+  color: #06D85F;
+}
+.popup .content {
+  max-height: 30%;
+  overflow: auto;
+}
+
+@media screen and (max-width: 700px){
+  .box{
+    width: 70%;
+  }
+  .popup{
+    width: 70%;
+  }
+}
+
+.button {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #ed844d;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 23px;
+  padding: 10px;
+  width: 250px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.close {
+    background: #606061;
+    color: #FFFFFF;
+    line-height: 25px;
+    position: absolute;
+    right: -12px;
+    text-align: center;
+    top: -10px;
+    width: 24px;
+    text-decoration: none;
+    font-weight: bold;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    border-radius: 12px;
+    -moz-box-shadow: 1px 1px 3px #000;
+    -webkit-box-shadow: 1px 1px 3px #000;
+    box-shadow: 1px 1px 3px #000;
+}
+.close:hover {
+    background: #00d9ff;
+}
+	</style>
+	<style>
+		div.gallery {
+			border: 1px solid #ccc;
+		}
+
+		div.gallery:hover {
+			border: 1px solid #777;
+		}
+
+		div.gallery img {
+			width: 100%;
+			height: auto;
+		}
+
+		div.desc {
+			padding: 15px;
+			text-align: center;
+		}
+
+		* {
+			box-sizing: border-box;
+		}
+
+		.signature {
+			padding: 0 10px;
+			float: left;
+			width: 230px;
+		}
+
+		@media only screen and (max-width: 1006px){
+			.responsive {
+				width: 49.99999%;
+				margin: 6px 0;
+			}
+		}
+
+		@media only screen and (max-width: 1006px){
+			.responsive {
+				width: 100%;
+			}
+		}
+
+		.clearfix:after {
+			content: "";
+			display: table;
+			clear: both;
+		}
+	</style>
+	<style>
+	.footer {
+	position: relative;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	background-color: #290000;
+	color: white;
+	text-align: center;
+	opacity: 80%;
+	}
+	</style>
+	
+	</head>
+	<body>
+	<div class="navbar" >
+		
+		<img src='logooo.png' vspace='2' hspace='25' align='left' height='60'>
+			
+		 <div class="dropdown">
+		    <button class="dropbtn">ANECDOTES
+		    	<i class="fa fa-caret-down"></i>
+		    </button>
+    		<div class="dropdown-content">
+   				<a href="anecdotes.html">Real Stories</a>
+   			</div>
+  		</div> 
+
+     <div class="dropdown">
+        <button class="dropbtn">CONSEQUENCES
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="consequences.html">A Young Mom's Life</a>
+          <a href="consequences.html">Mental Health</a>
+		  <a href="consequences.html">Risk Factors</a>
+		   <a href="consequences.html">Other Factors</a>
+        </div>
+      </div> 
+  
+  		<div class="dropdown">
+   			<button class="dropbtn">SOLUTION
+     			<i class="fa fa-caret-down"></i>
+   			</button>
+    		<div class="dropdown-content">
+      			<a href="#understanding">Comprehensive Understanding</a>
+      			<a href="#contraceptives">Contraceptive Techniques</a>
+    		</div>
+  		</div> 
+
+  		<div class="dropdown">
+   			<button class="dropbtn">QUESTIONS
+     			<i class="fa fa-caret-down"></i>
+   			</button>
+    		<div class="dropdown-content">
+      			<a href="questions.html">What's Missing?</a>
+      			<a href="questions.html">Why Use Birth Control?</a>
+				<a href='questions.html'>Why is it Essential?</a>
+    		</div>
+  		</div> 
+		
+		<div class="dropdown">
+   			<button class="dropbtn">HOME
+     			<i class="fa fa-caret-down"></i>
+   			</button>
+    		<div class="dropdown-content">
+				<a href="index.html"> CONTROLceptive </a>
+      			<a href="index.html">Teenage Pregnancy</a>
+				<a href="index.html">Survey</a>
+      			<a href="index.html">Survey Results</a>
+    		</div>
+  		</div> 
+    </div>
+	<br><br><br><br><br><br><br>
+	
+	<center>
+	<font face='montserrat extrabold' size='7' color='#290000'>
+		<i> SOLUTION? </i>
+	</font>
+	<table border='0' width='70%' cellpadding='10'>
+      <tr>
+        <td>
+        	<p align='middle' style='line-height:1.5'><font face='montserrat' size='4' color='#290000'>
+			<br>
+				<a id='understanding'>
+				This is why <b>Controlceptive.ph</b> exists! To provide you a community wherein we help each other<br> create a <b>comprehensive understanding</b>
+				pertaining contraceptives (birth control).
+			<br><br><br><br>
+			</p></font>
+		</td>
+	  </tr>
+	  <tr>
+		<td>
+			<font face='montserrat extrabold' size='6' color='#290000'>
+			<i> COMPREHENSIVE UNDERSTANDING <i>
+			</font>
+		</td>
+	  </tr>
+	  <tr>
+		<td>
+			<font face='montserrat' size='4' color='#290000'>
+			<p align='middle' style='line-height:1.5'>
+				Teenagers need to have a comprehensive understanding of abstinence, contraceptive techniques, and consequences. Although there are many
+				different ways to prevent a teenage girl from becoming pregnant, the only one that is absolutely effective is sexual abstinence. This method
+				is the only one that guarantees no risk of getting pregnant and protects the teen from getting any STD's. For many years, abstinence has 
+				been viewed as a decision based upon a religious or moral belief.
+			</p>
+			</font>
+		</td>
+	  </tr>
+	  <tr>
+		<td>
+			<font face='montserrat' size='4' color='#290000'>
+				In this article...
+			</font>
+		</td>
+	  </tr>
+	  <tr>
+		<td>
+			<font face='montserrat' size='5' color='#290000'>
+			<p align='middle'>
+				<b> "Promotion of Sexual Abstinence: Reducing Adolescent Sexual <br>Activity and Pregnancies" </b>
+			</font>
+		</td>
+	  </tr>
+	  <tr>
+		<td>
+			<font face='montserrat' size='4' color='#290000'>
+				Hani R. Khouzam says, 
+			</font>
+		</td>
+	  </tr>
+	  <tr>
+		<td>
+			<font face='montserrat' size='5' color='#290000'>
+			<p align='middle'>
+				<b><i> "Sexual abstinence is not associated with public health risks and needs to be presented and promoted as the most effective 
+				primary prevention for unplanned pregnancies." </i></b>
+			</font>
+		</td>
+	  </tr>
+	  <tr>
+		<td>
+			<font face='montserrat' size='4' color='#290000'>
+			<p align='middle' style='line-height:1.5'>
+				In this article, Dr. Joycelyn Elders proposes teaching sexual abstinence as prevention for<br> pregnancy, not as a religious or moral belief.
+				According to Khouzam, in a study involving 7,000 Utah teens, the students were taught one of three abstinence curriculums stressing abstinence
+				as a pregnancy prevention method. They were surveyed three times based on their attitudes on the issue. After taking the abstinence
+				curriculum, the studies found that from these students, a significantly higher percentage of them remained virgins than those who did
+				not go through the program. With results like this, it becomes evident that abstinence courses in schools are a sure way to get teens
+				to realize the responsibility that comes with becoming sexually active, and to get them thinking about choosing to remain abstinent.
+				The more information teenagers are given on the subject, the higher the chances that they will make this decision. For this reason,
+				<a id='contraceptives'>
+				it is important that teenagers be taught the health benefits of choosing to remain abstinent.
+				<br><br><br><br>
+			</p>
+			</font>
+		</td>
+	  </tr>
+	   <tr>
+		<td>
+			<font face='montserrat extrabold' size='6' color='#290000'>
+			<i> CONTRACEPTIVE TECHNIQUES <i>
+			<br><br>
+			</font>
+		</td>
+	  </tr>
+	  <tr>
+		<td>
+			<center>
+				<iframe width="900" height="500" src="https://www.youtube.com/embed/u6vU8_YGaZ4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+				</iframe>
+			</center>
+		</td>
+	  </tr>
+	  <tr>
+		<td>
+			<font face='montserrat' size='4' color='#290000'>
+			<p align='middle' style='line-height:1.5'>
+				Another one is about the various contraceptive techniques. Although abstinence remains the best way to prevent pregnancy among teens,
+				it is a fact that there are still a large number of them who will be involved in sexual relations. For this reason, it is important that
+				teens be provided with broad information on how to do so responsibly using these <b> contraceptive techniques: </b>
+			</p>
+			</font>
+		</td>
+	  </tr>
+	    <tr>
+		<td>
+		<center>
+	<div class="signature">
+		<div class="gallery">
+			<img src="femalesterilization.png" width="100%">
+			<div class="desc">
+				<font face='Montserrat' size='3' color='#290000'>
+						<b> FEMALE STERILIZATION </b>
+				</font>
+				<font face='Montserrat Light' size='2' color='#290000'>
+					<p style='line-height:1.5'>
+					Female sterilisation is an operation to permanently prevent pregnancy. The fallopian tubes are blocked or sealed to prevent the eggs 
+					from reaching the sperm and becoming fertilised.
+					</p>
+				</font>
+			</div>
+		</div>
+	</div>
+		<div class="signature">
+		<div class="gallery">
+			<img src="malesterilization.png" width="100%">
+			<div class="desc">
+				<font face='Montserrat' size='3' color='#290000'>
+						<b> MALE STERILIZATION </b>
+				</font>
+				<font face='Montserrat Light' size='2' color='#290000'>
+					<p style='line-height:1.5'>
+					<br>
+					A vasectomy (male sterilisation) is a surgical procedure to cut or seal the tubes that carry a man's sperm to permanently prevent pregnancy.
+					<br><br>
+					</p>
+				</font>
+			</div>
+		</div>
+	</div>
+	<div class="signature">
+		<div class="gallery">
+			<img src="pill.png" width="100%">
+			<div class="desc">
+				<font face='Montserrat' size='3' color='#290000'>
+						<b> THE PILL </b>
+						<br><br>
+				</font>
+				<font face='Montserrat Light' size='2' color='#290000'>
+					<p style='line-height:1.5'>
+					The combined oral contraceptive pill is usually just called "the pill". It has artificial versions of female hormones oestrogen and
+					progesterone, which women produce naturally in their ovaries.
+					</p>
+				</font>
+			</div>
+		</div>
+	</div>
+		<div class="signature">
+		<div class="gallery">
+			<img src="iud.png" width="100%">
+			<div class="desc">
+				<font face='Montserrat' size='3' color='#290000'>
+						<b> THE INTRAUTERINE DEVICE (IUD) </b>
+				</font>
+				<font face='Montserrat Light' size='2' color='#290000'>
+					<p style='line-height:1.5'>
+					<br><br>
+					An IUD is a small, T-shaped plastic and copper device that's put into your womb (uterus) by a doctor or nurse.
+					<br><br>
+					</p>
+				</font>
+			</div>
+		</div>
+	</div>
+		</center>
+		</td>
+	  </tr>
+	  <tr>
+		<td>
+		<center>
+	<div class="signature">
+		<div class="gallery">
+			<img src="injectibles.png" width="100%">
+			<div class="desc">
+				<font face='Montserrat' size='3' color='#290000'>
+						<b> INJECTIBLES </b>
+						<br><br>
+				</font>
+				<font face='Montserrat Light' size='2' color='#290000'>
+					<p style='line-height:1.5'>
+					The contraceptive injection (Depo-Provera, Sayana Press or Noristerat) releases the hormone progestogen into your 
+					bloodstream to prevent pregnancy.
+					<br><br><br>
+					</p>
+				</font>
+			</div>
+		</div>
+	</div>
+		<div class="signature">
+		<div class="gallery">
+			<img src="implants.png" width="100%">
+			<div class="desc">
+				<font face='Montserrat' size='3' color='#290000'>
+						<b> IMPLANTS </b>
+						<br><br>
+				</font>
+				<font face='Montserrat Light' size='2' color='#290000'>
+					<p style='line-height:1.5'>
+					The contraceptive<br> implant (Nexplanon) is a small flexible plastic rod that's placed under the skin in your upper arm by a 
+					doctor or nurse.
+					<br><br><br>
+					</p>
+				</font>
+			</div>
+		</div>
+	</div>
+	<div class="signature">
+		<div class="gallery">
+			<img src="malecondoms.png" width="100%">
+			<div class="desc">
+				<font face='Montserrat' size='3' color='#290000'>
+						<b> MALE CONDOMS </b>
+						<br><br>
+				</font>
+				<font face='Montserrat Light' size='2' color='#290000'>
+					<p style='line-height:1.5'>
+					Male condoms are <br>made from very thin latex (rubber), polyisoprene or polyurethane and are designed to stop a man's semen
+					from coming into contact with his sexual partner.
+					</p>
+				</font>
+			</div>
+		</div>
+	</div>
+		<div class="signature">
+		<div class="gallery">
+			<img src="femalecondoms.png" width="100%">
+			<div class="desc">
+				<font face='Montserrat' size='3' color='#290000'>
+						<b> FEMALE CONDOMS </b>
+						<br><br>
+				</font>
+				<font face='Montserrat Light' size='2' color='#290000'>
+					<p style='line-height:1.5'>
+					Female condoms are made from soft, thin synthetic latex or latex. They're worn inside the vagina to prevent semen getting to the womb.
+					<br><br><br>
+					</p>
+				</font>
+			</div>
+		</div>
+	</div>
+		</center>
+		</td>
+	  </tr>
+	  <tr>
+		<td>
+		<center>
+	<div class="signature">
+		<div class="gallery">
+			<img src="diaphragm.png" width="100%">
+			<div class="desc">
+				<font face='Montserrat' size='3' color='#290000'>
+						<b> THE DIAPHRAGM</b>
+						<br><br>
+				</font>
+				<font face='Montserrat Light' size='2' color='#290000'>
+					<p style='line-height:1.5'>
+					A contraceptive diaphragm or cap is a circular dome made of thin, soft silicone that's inserted into the vagina before sex. It covers
+					the cervix so sperm can't get into the womb (uterus) to fertilise an egg.
+					</p>
+				</font>
+			</div>
+		</div>
+	</div>
+		<div class="signature">
+		<div class="gallery">
+			<img src="jelly.png" width="100%">
+			<div class="desc">
+				<font face='Montserrat' size='3' color='#290000'>
+						<b> FOAM/JELLY </b>
+						<br><br>
+				</font>
+				<font face='Montserrat Light' size='2' color='#290000'>
+					<p style='line-height:1.5'>
+					Spermicide is a barrier method of birth control containing a sperm-killing product. Spermicides are available in foam, cream, jelly,
+					film, suppository, or tablet form.
+					<br><br>
+					</p>
+				</font>
+			</div>
+		</div>
+	</div>
+	<div class="signature">
+		<div class="gallery">
+			<img src="lactational.png" width="100%">
+			<div class="desc">
+				<font face='Montserrat' size='3' color='#290000'>
+						<b> LACTATIONAL AMENORRHEA </b>
+				</font>
+				<font face='Montserrat Light' size='2' color='#290000'>
+					<p style='line-height:1.5'>
+					Breastfeeding is a temporary contraceptive method which takes advantage of the way in which breastfeeding naturally makes a woman much 
+					less likely to conceive.
+					</p>
+				</font>
+			</div>
+		</div>
+	</div>
+		<div class="signature">
+		<div class="gallery">
+			<img src="traditional.png" width="100%">
+			<div class="desc">
+				<font face='Montserrat' size='3' color='#290000'>
+						<b> TRADITIONAL METHODS </b>
+				</font>
+				<font face='Montserrat Light' size='2' color='#290000'>
+					<p style='line-height:1.5'>
+					<br>
+					Traditional methods of contraception include <b> periodic abstinence or calendar method </b> and <b> withdrawal.</b>
+					<br><br><br>
+					</p>
+				</font>
+			</div>
+		</div>
+	</div>
+		</center>
+		</td>
+	  </tr>
+	  <tr>
+		<td>
+			<font face='montserrat' size='4' color='#290000'>
+			<br><br>
+				Most of the sex education in schools consists of one message:
+			</font>
+		</td>
+	  </tr>
+	  <tr>
+		<td>
+			<font face='montserrat' size='5' color='#290000'>
+			<p align='middle'>
+				<b> <i> "Don't have sex--but if you do, use a condom." </b>
+			</font>
+		</td>
+	  </tr>
+	   <tr>
+		<td>
+			<font face='montserrat' size='4' color='#290000'>
+			<p align='middle' style='line-height:1.5'>
+				The problem that rises from this is that teenagers are not being exposed to extensive information on the various forms of birth
+				control, condoms, and other methods of prevention that are available. 
+				<br><br>
+				According to Helen Lippman, contraceptives are talked about in sex education classes, but only as being ineffective in preventing 
+				pregnancy and diseases. Also, these classes on contraceptives should include information on how to obtain the different methods of
+				birth control.
+				<br><br>
+			</p>
+			</font>
+		</td>
+	  </tr>
+	</table>
+	</center>
+	
+	<div class="footer">
+		<br>
+		<font face='montserrat' size='2' color='white'>
+		  <b> ALL RIGHTS RESERVED © 2019 </b>
+		</font>
+		<br><br>
+	</div>
+	
+	</body>
+</html>

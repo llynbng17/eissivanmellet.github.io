@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>
+			CONTROLceptive
+		</title>
+	<style>
+body, html {
+height: 100%;
+margin: 0;
+}
+
+
+.navbar {
+    overflow: hidden;
+	position: fixed;
+	top: 0;
+    background-color: #290000;
+    font-family: Gotham, Gotham Book, sans-serif;
+    width: 100%;
+}
+
+
+.navbar a {
+    float: right;
+    font-size: 13px;
+    color: white;
+    text-align: center;
+    padding: 25px 16px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.dropdown {
+    float: right;
+    overflow: hidden;
+
+}
+
+.dropdown .dropbtn {
+    font-size: 14	px;    
+    border: none;
+    outline: none;
+    color: white;
+    padding: 25px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn {
+    background-color: #f9f9f9;
+    color: #2a3557;
+    transition: 0.3s;
+}
+
+.navbar img {
+  vertical-align: middle;
+}
+
+.dropdown-content {
+    display: none;
+    position: fixed;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+    transition: 0.3s;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+}
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup {
+  margin: 70px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  width: 30%;
+  position: relative;
+  transition: all 5s ease-in-out;
+}
+
+.popup h2 {
+  margin-top: 0;
+  color: #333;
+  font-family: Tahoma, Arial, sans-serif;
+}
+.popup .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+.popup .close:hover {
+  color: #06D85F;
+}
+.popup .content {
+  max-height: 30%;
+  overflow: auto;
+}
+
+@media screen and (max-width: 700px){
+  .box{
+    width: 70%;
+  }
+  .popup{
+    width: 70%;
+  }
+}
+
+.button {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #ed844d;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 23px;
+  padding: 10px;
+  width: 250px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.close {
+    background: #606061;
+    color: #FFFFFF;
+    line-height: 25px;
+    position: absolute;
+    right: -12px;
+    text-align: center;
+    top: -10px;
+    width: 24px;
+    text-decoration: none;
+    font-weight: bold;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    border-radius: 12px;
+    -moz-box-shadow: 1px 1px 3px #000;
+    -webkit-box-shadow: 1px 1px 3px #000;
+    box-shadow: 1px 1px 3px #000;
+}
+.close:hover {
+    background: #00d9ff;
+}
+	</style>
+	<style>
+		div.gallery {
+			border: 1px solid #ccc;
+		}
+
+		div.gallery:hover {
+			border: 1px solid #777;
+		}
+
+		div.gallery img {
+			width: 100%;
+			height: auto;
+		}
+
+		div.desc {
+			padding: 15px;
+			text-align: center;
+		}
+
+		* {
+			box-sizing: border-box;
+		}
+
+		.signature {
+			padding: 0 10px;
+			float: left;
+			width: 230px;
+		}
+
+		@media only screen and (max-width: 1006px){
+			.responsive {
+				width: 49.99999%;
+				margin: 6px 0;
+			}
+		}
+
+		@media only screen and (max-width: 1006px){
+			.responsive {
+				width: 100%;
+			}
+		}
+
+		.clearfix:after {
+			content: "";
+			display: table;
+			clear: both;
+		}
+	</style>
+	<style>
+	.footer {
+	position: relative;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	background-color: #290000;
+	color: white;
+	text-align: center;
+	opacity: 80%;
+	}
+	</style>
+	</head>
+	<body>
+	<div class="navbar" >
+		
+		<img src='logooo.png' vspace='2' hspace='25' align='left' height='60'>
+			
+		 <div class="dropdown">
+		    <button class="dropbtn">ANECDOTES
+		    	<i class="fa fa-caret-down"></i>
+		    </button>
+    		<div class="dropdown-content">
+   				<a href="anecdotes.html">Real Stories</a>
+   			</div>
+  		</div> 
+
+     <div class="dropdown">
+        <button class="dropbtn">CONSEQUENCES
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="consequences.html">A Young Mom's Life</a>
+          <a href="#mental_health">Mental Health</a>
+		  <a href="#risk_factors">Risk Factors</a>
+		   <a href="#other_factors">Other Factors</a>
+        </div>
+      </div> 
+  
+  		<div class="dropdown">
+   			<button class="dropbtn">SOLUTION
+     			<i class="fa fa-caret-down"></i>
+   			</button>
+    		<div class="dropdown-content">
+      			<a href="solution.html">Comprehensive Understanding</a>
+      			<a href="solution.html">Contraceptive Techniques</a>
+    		</div>
+  		</div> 
+
+  		<div class="dropdown">
+   			<button class="dropbtn">QUESTIONS
+     			<i class="fa fa-caret-down"></i>
+   			</button>
+    		<div class="dropdown-content">
+      			<a href="questions.html">What's Missing?</a>
+      			<a href="questions.html">Why Use Birth Control?</a>
+				<a href='questions.html'>Why is it Essential?</a>
+    		</div>
+  		</div> 
+		
+		<div class="dropdown">
+   			<button class="dropbtn">HOME
+     			<i class="fa fa-caret-down"></i>
+   			</button>
+    		<div class="dropdown-content">
+				<a href="index.html"> CONTROLceptive </a>
+      			<a href="index.html">Teenage Pregnancy</a>
+				<a href="index.html">Survey</a>
+      			<a href="index.html">Survey Results</a>
+    		</div>
+  		</div> 
+    </div>
+	<br><br><br><br><br><br><br>
+	
+	<center>
+	<font face='montserrat extrabold' size='7' color='#290000'>
+		<i> CONSEQUENCES </i>
+	</font>
+	<table border='0' width='70%' cellpadding='10'>
+      <tr>
+        <td>
+        	<p align='middle' style='line-height:1.5'><font face='montserrat' size='4' color='#290000'>
+			<br>
+				There were nearly 250,000 babies born in 2014 to teen moms, according to the U.S. Department<br> of Health & Human Services. 
+				About 77 percent of these pregnancies were unplanned. A teenage pregnancy can change the course of a young mom’s life. It 
+				puts her in a place where she’s responsible not only for herself, but also for another human being.
+			<br><br><br><br>
+			</p></font>
+		</td>
+	  </tr>
+	  <tr>
+		<td>
+			<font face='montserrat extrabold' size='6' color='#290000'>
+			<i> A YOUNG MOM'S LIFE <i>
+			</font>
+		</td>
+	  </tr>
+	  <tr>
+		<td>
+			<img src='youngmom.jpg' width='100%'>
+		</td>
+	  </tr>
+	  <tr>
+		<td>
+			<font face='montserrat' size='4' color='#290000'>
+			<p align='middle' style='line-height:1.5'>
+				Carrying a baby and becoming a mom not only creates physical changes. Women also go through mental changes. Young moms face added stress from:
+			</p>
+			</font>
+		</td>
+	  </tr>
+	  <tr>
+		<td>
+		
+			<center>
+			<table border='0' width='40%'>
+				<tr>
+					<td>
+					<font face='montserrat' size='4' color='#290000'>
+					<ul style="list-style-type:disc;line-height:1.5">
+						<li> sleepless nights </li>
+						<li> arranging child care </li>
+						<li> making doctor's appointments </li>
+						<li> attempting to finish high school </li>
+					</ul> 
+					</font>
+					</td>
+				</tr>
+			</table>
+			</center>
+			
+		</td>
+	  </tr>
+	  <tr>
+		<td>
+			<font face='montserrat' size='4' color='#290000'>
+			<p align='middle' style='line-height:1.5'>
+				While not all teenage mothers are affected greatly by mental and physical changes, many are. If you experience mental health changes 
+				<a id='mental_health'>
+				after childbirth, it’s important to reach out to others and seek professional help.
+				<br><br><br><br>
+			</p>
+			</font>
+		</td>
+	  </tr>
+	  <tr>
+		<td>
+			<font face='montserrat extrabold' size='6' color='#290000'>
+			<i> MENTAL HEALTH OF TEENAGE MOM <i>
+			</font>
+		</td>
+	  </tr>
+	  <tr>
+		<td>
+			<font face='montserrat' size='4' color='#290000'>
+			<p align='middle' style='line-height:1.5'>
+				A research study published in the journal Pediatrics studied more than 6,000 Canadian women, ranging in age from adolescents
+				to adults. The researchers found that girls ranging from 15 to 19 experienced postpartum depression at a rate that was twice
+				as high as women aged 25 and older.
+				<br><br>
+				Another study reported that teen mothers face significant levels of stress that can then lead to increased mental health concerns. 
+				In addition to higher rates of postpartum depression, teenage mothers have higher rates of depression.
+				<br><br>
+				They also have higher rates of suicidal ideation than their peers who aren’t mothers. Teen mothers are more likely to experience 
+				posttraumatic stress disorder (PTSD) than other teenage women, as well. This could be because teen moms are more likely to have gone
+				through mental and/or physical abuse.
+				<br><br>
+				Teen moms might face a number of mental health conditions related to childbirth and being a new mom. Examples of these conditions include:
+			</p>
+			</font>
+		</td>
+	  </tr>
+	  <tr>
+		<td>
+		
+			<center>
+			<table border='0' width='70%'>
+				<tr>
+					<td>
+					<font face='montserrat' size='4' color='#290000'>
+					<ul style="list-style-type:disc;line-height:1.5">
+						<li> <b>Baby blues:</b> The “baby blues” are when a woman experiences symptoms for one to two weeks after giving birth. 
+								These symptoms include mood swings, anxiety, sadness, overwhelm, difficulty concentrating, trouble eating, and 
+								difficulty sleeping. </li>
+						<li> <b>Depression:</b> Being a teen mom is a risk factor for depression. If a mom has a baby before 37 weeks or experiences
+								complications, depression risks can increase. </li>
+						<li> <b>Postpartum depression:</b> Postpartum depression involves more severe and significant symptoms than baby blues. Teen
+								moms are twice as likely to experience postpartum depression as their adult counterparts. Women sometimes mistake postpartum 
+								depression for the baby blues. Baby blues symptoms will go away after a few weeks. Depression symptoms won’t. </b>
+					</ul>
+					</font>
+					</td>
+				</tr>
+			</table>
+			</center>
+			
+		</td>
+	  </tr>
+	  <tr>
+		<td>
+			<font face='montserrat' size='4' color='#290000'>
+			<p align='middle' style='line-height:1.5'>
+				Additional symptoms of postpartum depression include:
+			</p>
+			</font>
+		</td>
+	  </tr>
+	   <tr>
+		<td>
+		
+			<center>
+			<table border='0' width='50%'>
+				<tr>
+					<td>
+					<font face='montserrat' size='4' color='#290000'>
+					<ul style="list-style-type:disc;line-height:1.5">
+						<li> difficulty bonding with your baby </li>
+						<li> overwhelming fatigue </li>
+						<li> feeling worthless </li>
+						<li> anxiety </li>
+						<li> panic attacks </li>
+						<li> thinking of harming yourself or your baby </li>
+						<li> difficulty enjoying activities you once did </li>
+					</ul> 
+					</font>
+					</td>
+				</tr>
+			</table>
+			</center>
+			
+		</td>
+	  </tr>
+	  <tr>
+		<td>
+			<font face='montserrat' size='4' color='#290000'>
+			<p align='middle' style='line-height:1.5'>
+				If you experience these effects after giving birth, help is available. It’s important to know that you aren’t alone. Remember, 
+				<a id='risk_factors'>
+				many women experience postpartum depression.
+				<br><br><br><br>
+			</p>
+			</font>
+		</td>
+	  </tr>
+	  <tr>
+		<td>
+			<font face='montserrat extrabold' size='6' color='#290000'>
+			<i> RISK FACTORS OF MENTAL HEALTH CONCERNS <i>
+			</font>
+		</td>
+	  </tr>
+	  <tr>
+		<td>
+			<font face='montserrat' size='4' color='#290000'>
+			<p align='middle' style='line-height:1.5'>
+				Teenage mothers are more likely to fall in demographic categories that make the risk of mental illness higher. These risk factors include:
+			</p>
+			</font>
+		</td>
+	  </tr>
+	  <tr>
+		<td>
+		
+			<center>
+			<table border='0' width='60%'>
+				<tr>
+					<td>
+					<font face='montserrat' size='4' color='#290000'>
+					<ul style="list-style-type:disc;line-height:1.5">
+						<li> having parents with low education levels </li>
+						<li> a history of child abuse </li>
+						<li> limited social networks </li>
+						<li> living in chaotic and unstable home environments </li>
+						<li> living in low-income communities </li>
+					</ul> 
+					</font>
+					</td>
+				</tr>
+			</table>
+			</center>
+			
+		</td>
+	  </tr>
+	  <tr>
+		<td>
+			<font face='montserrat' size='4' color='#290000'>
+			<p align='middle' style='line-height:1.5'>
+				<a id='other_factors'>
+				In addition to these factors, teenage mothers are more likely to experience significant levels of stress that can increase risk for mental
+				health disorders.
+				<br><br><br><br>
+			</p>
+			</font>
+		</td>
+	  </tr>
+	  <tr>
+		<td>
+			<font face='montserrat extrabold' size='6' color='#290000'>
+			<i> OTHER FACTORS <i>
+			</font>
+		</td>
+	  </tr>
+	  <tr>
+		<td>
+			<font face='montserrat' size='4' color='#290000'>
+			<p align='middle' style='line-height:1.5'>
+				This includes <b>finances</b>, according to a study published in the “American Journal of Epidemiology”, teenage parents often don’t
+				complete higher levels of education. They often have more restricted economic opportunities than older parents. The sad fact, higher
+				education is typically associated with a greater ability to earn more income over the course of a lifetime.
+				<br><br>
+				Second, <b>physical health</b>, according to a study published in Maternal Child Health Journal, teenage mothers had the poorest physical health
+				of all categories of women studied, including women who engaged in unprotected sex. Teenage mothers may neglect their physical health while
+				caring for their babies. They may also not have access to or know about healthy foods and eating. They are also more likely to be obese.
+				<br><br>
+				According to the National Institutes of Health, there’s a higher risk of the following in teenage pregnancy:
+			</p>
+			</font>
+		</td>
+	  </tr>
+	  <tr>
+		<td>
+		
+			<center>
+			<table border='0' width='55%'>
+				<tr>
+					<td>
+					<font face='montserrat' size='4' color='#290000'>
+					<ul style="list-style-type:disc;line-height:1.5">
+						<li> preeclampsia </li>
+						<li> anemia </li>
+						<li> contracting STDs (sexually transmitted diseases) </li>
+						<li> premature delivery </li>
+						<li> delivering at low birth weight </li>
+					</ul> 
+					</font>
+					</td>
+				</tr>
+			</table>
+			</center>
+			
+		</td>
+	  </tr>
+	  <tr>
+		<td>
+			<font face='montserrat' size='4' color='#290000'>
+			<p align='middle' style='line-height:1.5'>
+				Third, <b>Impact to the Child</b>, according to the U.S. Department of Health and Human Services, children born to adolescent parents
+				face greater challenges throughout their lives. These challenges include getting less education and worse behavioral and physical health
+				outcomes.
+				<br><br>
+				According to Youth.gov, other effects to a child of a teenage mother include:
+			</p>
+			</font>
+		</td>
+	  </tr>
+	  <tr>
+		<td>
+		
+			<center>
+			<table border='0' width='70%'>
+				<tr>
+					<td>
+					<font face='montserrat' size='4' color='#290000'>
+					<ul style="list-style-type:disc;line-height:1.5">
+						<li> greater risk for lower birth weight and infant mortality </li>
+						<li> less prepared to enter kindergarten </li>
+						<li> rely more heavily on publicly funded health care </li>
+						<li> are more likely to drop out of high school </li>
+						<li> are more likely to be incarcerated at some time during adolescence </li>
+						<li> are more likely to be unemployed or underemployed as a young adult </li>
+					</ul> 
+					</font>
+					</td>
+				</tr>
+			</table>
+			</center>
+			
+		</td>
+	  </tr>
+	  <tr>
+		<td>
+			<font face='montserrat' size='4' color='#290000'>
+			<p align='middle' style='line-height:1.5'>
+				These effects can create a perpetual cycle for teenage mothers, their children, and their children’s children.
+				<br><br>
+				Lastly, <b>the future</b>, teenage motherhood doesn’t have to mean a young woman won’t be successful in life. But it’s important they 
+				consider what other young mothers before them have faced related to overall health, financial stability, and the health of their child.
+				<br><br><br><br>
+			</p>
+			</font>
+		</td>
+	  </tr>
+	</table>
+	</center>
+	
+	<div class="footer">
+		<br>
+		<font face='montserrat' size='2' color='white'>
+		  <b> ALL RIGHTS RESERVED © 2019 </b>
+		</font>
+		<br><br>
+	</div>
+	</body>
+</html>
